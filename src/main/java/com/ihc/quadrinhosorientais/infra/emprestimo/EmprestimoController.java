@@ -2,6 +2,8 @@ package com.ihc.quadrinhosorientais.infra.emprestimo;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,7 @@ public class EmprestimoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Emprestimo> criar(@RequestBody final Emprestimo emprestimo) {
+	public ResponseEntity<Emprestimo> criar(@Valid @RequestBody final Emprestimo emprestimo) {
 
 		final Emprestimo emprestimosalvo = this.emprestimoService.criar(emprestimo);
 		return ResponseEntity.status(HttpStatus.CREATED).body(emprestimosalvo);

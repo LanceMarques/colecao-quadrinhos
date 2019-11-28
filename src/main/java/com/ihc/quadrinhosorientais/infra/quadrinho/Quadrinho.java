@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.ihc.quadrinhosorientais.infra.editora.Editora;
@@ -40,9 +42,13 @@ public class Quadrinho {
 	@Column(name="ESTADO_CONSERVACAO")
 	private EstadoConservacao estadoConservacao;
 	
+	@Min(value = 0)
+	@Max(value = 20)
 	@Column(name="QUANTIDADE")
 	private Integer quantidade;
 	
+	//@Min(value = 0)
+	//@Max(value = 100)
 	@Column(name="VOLUME")
 	private Integer volume;
 	

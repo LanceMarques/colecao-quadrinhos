@@ -21,13 +21,14 @@ public class AmigoExceptionHandler extends ResponseEntityExceptionHandler {
   @Autowired
   private MessageSource messageSource;
 
-  @ExceptionHandler({AmigoNaoEncontradoException.class})
-  public ResponseEntity<Object> handleAmigoNaoEncontradoException(
-      AmigoNaoEncontradoException ex) {
-    final String mensagemUsr =
-        messageSource.getMessage("amigo-nao-encontrado", null, LocaleContextHolder.getLocale());
-    final String mensagemDev = ex.toString();
-    final List<Erro> erros = Arrays.asList(new Erro(mensagemUsr, mensagemDev));
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erros);
-  }
+//  @ExceptionHandler({AmigoNaoEncontradoException.class})
+//  public ResponseEntity<Object> handleAmigoNaoEncontradoException(
+//      AmigoNaoEncontradoException ex) {
+//    final String mensagemUsr =
+//        messageSource.getMessage("amigo-nao-encontrado", null, LocaleContextHolder.getLocale());
+//    final String mensagemDev = ex.toString();
+//    final List<Erro> erros = Arrays.asList(new Erro(mensagemUsr, mensagemDev));
+//    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erros);
+//  }
+  
 }

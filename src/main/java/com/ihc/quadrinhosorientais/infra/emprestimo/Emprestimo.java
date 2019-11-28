@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.ihc.quadrinhosorientais.infra.amigo.Amigo;
 import com.ihc.quadrinhosorientais.infra.emprestimo.enums.StatusEmprestimo;
@@ -26,6 +27,7 @@ public class Emprestimo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "AMIGO_ID")
 	private Amigo amigo;

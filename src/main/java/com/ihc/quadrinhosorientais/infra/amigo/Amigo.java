@@ -6,24 +6,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="AMIGO")
+@Table(name = "AMIGO")
 public class Amigo {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="NOME")
-	private String nome; 
-	
-	@Column(name="APELIDO")
+
+	@Size(min = 3, max = 20)
+	@NotNull
+	@Column(name = "NOME")
+	private String nome;
+
+	//@Size(min = 3, max = 20)
+	@Column(name = "APELIDO")
 	private String apelido;
-	
-	@Column(name="NUMERO_CELULAR")
+
+	@Column(name = "NUMERO_CELULAR")
 	private String celular;
-	
+
 	public Amigo() {
 		super();
 	}
@@ -67,5 +73,5 @@ public class Amigo {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-		
+
 }

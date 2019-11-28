@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.ihc.quadrinhosorientais.infra.titulo.enums.EstadoColecao;
 
@@ -16,13 +17,14 @@ import com.ihc.quadrinhosorientais.infra.titulo.enums.EstadoColecao;
 public class Titulo {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name="NOME")
+	@Size(min = 3, max = 5)
+	@Column(name = "NOME")
 	private String nome;
 
-	@Column(name="ESTADO_COLECAO")
+	@Column(name = "ESTADO_COLECAO")
 	@Enumerated(EnumType.STRING)
 	private EstadoColecao estadoColecao;
 
