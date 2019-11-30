@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ihc.quadrinhosorientais.infra.amigo.Amigo;
 import com.ihc.quadrinhosorientais.infra.amigo.AmigoService;
 import com.ihc.quadrinhosorientais.infra.emprestimo.exceptions.EmprestimoNaoEncontradoException;
@@ -45,7 +43,7 @@ public class EmprestimoService {
 		emprestimo.setQuadrinhos(Arrays.asList());
 
 		emprestimo.setAmigo(amigoSalvo);
-
+		
 		final Emprestimo emprestimoSalvo = this.emprestimoRepository.save(emprestimo);
 
 		final List<EmprestimoTemQuadrinho> quadrinhosEmprestados = new ArrayList<EmprestimoTemQuadrinho>();

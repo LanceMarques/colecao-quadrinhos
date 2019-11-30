@@ -1,7 +1,6 @@
 package com.ihc.quadrinhosorientais.infra.quadrinho;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,47 +17,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/quadrinhos")
 public class QuadrinhoController {
 
-	@Autowired
-	private QuadrinhoService quadrinhoService;
+  @Autowired
+  private QuadrinhoService quadrinhoService;
 
-	@GetMapping
-	public ResponseEntity<List<Quadrinho>> listar() {
+  @GetMapping("/titulo/{idTitulo}")
+  public ResponseEntity<List<Quadrinho>> listarPorTitulo(
+      @PathVariable("idTitulo") final Integer idTitulo) {
 
-		final List<Quadrinho> quadrinhos = this.quadrinhoService.listar();
-		return ResponseEntity.status(HttpStatus.OK).body(quadrinhos);
+    final List<Quadrinho> quadrinhos = this.quadrinhoService.listarPorTitulo(idTitulo);
+    return ResponseEntity.status(HttpStatus.OK).body(quadrinhos);
 
-	}
+  }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Quadrinho> buscarPorId(@PathVariable("id") final Integer id) {
+  @GetMapping("/{id}")
+  public ResponseEntity<Quadrinho> buscarPorId(@PathVariable("id") final Integer id) {
 
-		final Quadrinho quadrinhoSalvo = this.quadrinhoService.buscarPorId(id);
-		return ResponseEntity.status(HttpStatus.OK).body(quadrinhoSalvo);
+    final Quadrinho quadrinhoSalvo = this.quadrinhoService.buscarPorId(id);
+    return ResponseEntity.status(HttpStatus.OK).body(quadrinhoSalvo);
 
-	}
+  }
 
-	@PostMapping
-	public ResponseEntity<Quadrinho> criar(@RequestBody final Quadrinho quadrinho) {
+  @PostMapping
+  public ResponseEntity<Quadrinho> criar(@RequestBody final Quadrinho quadrinho) {
 
-		final Quadrinho quadrinhosalvo = this.quadrinhoService.criar(quadrinho);
-		return ResponseEntity.status(HttpStatus.CREATED).body(quadrinhosalvo);
+    final Quadrinho quadrinhosalvo = this.quadrinhoService.criar(quadrinho);
+    return ResponseEntity.status(HttpStatus.CREATED).body(quadrinhosalvo);
 
-	}
+  }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Quadrinho> atualizar(@PathVariable final Integer id, @RequestBody final Quadrinho quadrinho) {
+  @PutMapping("/{id}")
+  public ResponseEntity<Quadrinho> atualizar(@PathVariable final Integer id,
+      @RequestBody final Quadrinho quadrinho) {
 
-		final Quadrinho QuadrinhoAtualizado = this.quadrinhoService.atualizar(id, quadrinho);
-		return ResponseEntity.status(HttpStatus.OK).body(QuadrinhoAtualizado);
+    final Quadrinho QuadrinhoAtualizado = this.quadrinhoService.atualizar(id, quadrinho);
+    return ResponseEntity.status(HttpStatus.OK).body(QuadrinhoAtualizado);
 
-	}
+  }
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> excluir(@PathVariable final Integer id) {
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> excluir(@PathVariable final Integer id) {
 
-		this.quadrinhoService.excluirPorId(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    this.quadrinhoService.excluirPorId(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
-	}
+  }
 
 }

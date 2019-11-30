@@ -12,153 +12,109 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import com.ihc.quadrinhosorientais.infra.editora.Editora;
 import com.ihc.quadrinhosorientais.infra.quadrinho.enums.EstadoConservacao;
-import com.ihc.quadrinhosorientais.infra.quadrinho.enums.TipoQuadrinho;
 import com.ihc.quadrinhosorientais.infra.titulo.Titulo;
 
 @Entity
-@Table(name="QUADRINHO")
+@Table(name = "QUADRINHO")
 public class Quadrinho {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	
-	@NotNull
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="TITULO_ID")
-	private Titulo titulo;
-	
-	@NotNull
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="EDITORA_ID")
-	private Editora editora;
-	
-	@Column(name="TIPO")
-	private TipoQuadrinho tipoQuadrinho;
-	
-	@Column(name="ESTADO_CONSERVACAO")
-	private EstadoConservacao estadoConservacao;
-	
-	@Min(value = 0)
-	@Max(value = 20)
-	@Column(name="QUANTIDADE")
-	private Integer quantidade;
-	
-	//@Min(value = 0)
-	//@Max(value = 100)
-	@Column(name="VOLUME")
-	private Integer volume;
-	
-	@Column(name="VALOR")
-	private double valor;
-	
-	@Column(name="AVALIACAO")
-	private Integer avaliacao;
-	
-	@Column(name="OBSERVACAO")
-	private String observacao;
-	
-	public Quadrinho() {
-		super();
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-	public Quadrinho(Integer id, Titulo titulo, Editora editora, TipoQuadrinho tipoQuadrinho,
-			EstadoConservacao estadoConservacao, Integer quantidade, Integer volume, double valor, Integer avaliacao,
-			String observacao) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.editora = editora;
-		this.tipoQuadrinho = tipoQuadrinho;
-		this.estadoConservacao = estadoConservacao;
-		this.quantidade = quantidade;
-		this.volume = volume;
-		this.valor = valor;
-		this.avaliacao = avaliacao;
-		this.observacao = observacao;
-	}
+  @NotNull
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "TITULO_ID")
+  private Titulo titulo;
 
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "EDITORA")
+  private String editora;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "ESTADO_CONSERVACAO")
+  private EstadoConservacao estadoConservacao;
 
-	public Titulo getTitulo() {
-		return titulo;
-	}
+  @Min(value = 0)
+  @Max(value = 20)
+  @Column(name = "QUANTIDADE")
+  private Integer quantidade;
 
-	public void setTitulo(Titulo titulo) {
-		this.titulo = titulo;
-	}
+  @Column(name = "VOLUME")
+  private Integer volume;
 
-	public Editora getEditora() {
-		return editora;
-	}
+  @Column(name = "VALOR")
+  private double valor;
 
-	public void setEditora(Editora editora) {
-		this.editora = editora;
-	}
+  public Quadrinho() {
+    super();
+  }
 
-	public TipoQuadrinho getTipoQuadrinho() {
-		return tipoQuadrinho;
-	}
+  public Quadrinho(Integer id, Titulo titulo, String editora, EstadoConservacao estadoConservacao,
+      Integer quantidade, Integer volume, double valor) {
+    super();
+    this.id = id;
+    this.titulo = titulo;
+    this.editora = editora;
+    this.estadoConservacao = estadoConservacao;
+    this.quantidade = quantidade;
+    this.volume = volume;
+    this.valor = valor;
+  }
 
-	public void setTipoQuadrinho(TipoQuadrinho tipoQuadrinho) {
-		this.tipoQuadrinho = tipoQuadrinho;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public EstadoConservacao getEstadoConservacao() {
-		return estadoConservacao;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setEstadoConservacao(EstadoConservacao estadoConservacao) {
-		this.estadoConservacao = estadoConservacao;
-	}
+  public Titulo getTitulo() {
+    return titulo;
+  }
 
-	public Integer getQuantidade() {
-		return quantidade;
-	}
+  public void setTitulo(Titulo titulo) {
+    this.titulo = titulo;
+  }
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
+  public String getEditora() {
+    return editora;
+  }
 
-	public Integer getVolume() {
-		return volume;
-	}
+  public void setEditora(String editora) {
+    this.editora = editora;
+  }
 
-	public void setVolume(Integer volume) {
-		this.volume = volume;
-	}
+  public EstadoConservacao getEstadoConservacao() {
+    return estadoConservacao;
+  }
 
-	public double getValor() {
-		return valor;
-	}
+  public void setEstadoConservacao(EstadoConservacao estadoConservacao) {
+    this.estadoConservacao = estadoConservacao;
+  }
 
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
+  public Integer getQuantidade() {
+    return quantidade;
+  }
 
-	public Integer getAvaliacao() {
-		return avaliacao;
-	}
+  public void setQuantidade(Integer quantidade) {
+    this.quantidade = quantidade;
+  }
 
-	public void setAvaliacao(Integer avaliacao) {
-		this.avaliacao = avaliacao;
-	}
+  public Integer getVolume() {
+    return volume;
+  }
 
-	public String getObservacao() {
-		return observacao;
-	}
+  public void setVolume(Integer volume) {
+    this.volume = volume;
+  }
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-		
+  public double getValor() {
+    return valor;
+  }
+
+  public void setValor(double valor) {
+    this.valor = valor;
+  }
+
 }
