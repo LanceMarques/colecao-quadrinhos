@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ihc.quadrinhosorientais.infra.quadrinho.exceptions.QuadrinhoEmprestimoVinculadoException;
 import com.ihc.quadrinhosorientais.infra.quadrinho.exceptions.QuadrinhoNaoEncontradoException;
 
 @Service
@@ -37,6 +38,13 @@ public class QuadrinhoService {
 
   public void excluirPorId(final Integer id) {
     final Quadrinho quadrinhoSalvo = this.buscarPorId(id);
+
+    if (quadrinhoSalvo.temEmprestimoVinculado()) {
+
+      throw new QuadrinhoEmprestimoVinculadoException();
+
+    }
+
     this.quadrinhoRepository.delete(quadrinhoSalvo);
   }
 

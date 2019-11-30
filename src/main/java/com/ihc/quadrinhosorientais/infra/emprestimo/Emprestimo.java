@@ -1,8 +1,7 @@
 package com.ihc.quadrinhosorientais.infra.emprestimo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.ihc.quadrinhosorientais.infra.amigo.Amigo;
 import com.ihc.quadrinhosorientais.infra.emprestimo.enums.StatusEmprestimo;
 import com.ihc.quadrinhosorientais.infra.emprestimotemquadrinho.EmprestimoTemQuadrinho;
@@ -23,88 +26,94 @@ import com.ihc.quadrinhosorientais.infra.emprestimotemquadrinho.EmprestimoTemQua
 @Table(name = "EMPRESTIMO")
 public class Emprestimo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "AMIGO_ID")
-	private Amigo amigo;
+  @NotNull
+  @ManyToOne
+  @JoinColumn(name = "AMIGO_ID")
+  private Amigo amigo;
 
-	@Column(name = "DATA_REALIZACAO")
-	private Date dataRealizacao;
+  @JsonFormat(pattern = "YYYY-MM-dd")
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
+  @Column(name = "DATA_REALIZACAO")
+  private LocalDate dataRealizacao;
 
-	@Column(name = "DATA_DEVOLUCAO")
-	private Date dataDevolucao;
+  @JsonFormat(pattern = "YYYY-MM-dd")
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
+  @Column(name = "DATA_DEVOLUCAO")
+  private LocalDate dataDevolucao;
 
-	@Column(name = "STATUS")
-	private StatusEmprestimo statusEmprestimo;
+  @Column(name = "STATUS")
+  private StatusEmprestimo statusEmprestimo;
 
-	@OneToMany(mappedBy = "emprestimo", cascade = CascadeType.ALL)
-	private List<EmprestimoTemQuadrinho> quadrinhos;
-	
-	public Emprestimo() {
-		super();
-	}
+  @OneToMany(mappedBy = "emprestimo", cascade = CascadeType.ALL)
+  private List<EmprestimoTemQuadrinho> quadrinhos;
 
-	public Emprestimo(Integer id, Amigo amigo, Date dataRealizacao, Date dataDevolucao,
-			StatusEmprestimo statusEmprestimo, List<EmprestimoTemQuadrinho> quadrinhos) {
-		super();
-		this.id = id;
-		this.amigo = amigo;
-		this.dataRealizacao = dataRealizacao;
-		this.dataDevolucao = dataDevolucao;
-		this.statusEmprestimo = statusEmprestimo;
-		this.quadrinhos = quadrinhos;
-	}
+  public Emprestimo() {
+    super();
+  }
 
-	public Integer getId() {
-		return id;
-	}
+  public Emprestimo(Integer id, Amigo amigo, LocalDate dataRealizacao, LocalDate dataDevolucao,
+      StatusEmprestimo statusEmprestimo, List<EmprestimoTemQuadrinho> quadrinhos) {
+    super();
+    this.id = id;
+    this.amigo = amigo;
+    this.dataRealizacao = dataRealizacao;
+    this.dataDevolucao = dataDevolucao;
+    this.statusEmprestimo = statusEmprestimo;
+    this.quadrinhos = quadrinhos;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public Amigo getAmigo() {
-		return amigo;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setAmigo(Amigo amigo) {
-		this.amigo = amigo;
-	}
+  public Amigo getAmigo() {
+    return amigo;
+  }
 
-	public Date getDataRealizacao() {
-		return dataRealizacao;
-	}
+  public void setAmigo(Amigo amigo) {
+    this.amigo = amigo;
+  }
 
-	public void setDataRealizacao(Date dataRealizacao) {
-		this.dataRealizacao = dataRealizacao;
-	}
+  public LocalDate getDataRealizacao() {
+    return dataRealizacao;
+  }
 
-	public Date getDataDevolucao() {
-		return dataDevolucao;
-	}
+  public void setDataRealizacao(LocalDate dataRealizacao) {
+    this.dataRealizacao = dataRealizacao;
+  }
 
-	public void setDataDevolucao(Date dataDevolucao) {
-		this.dataDevolucao = dataDevolucao;
-	}
+  public LocalDate getDataDevolucao() {
+    return dataDevolucao;
+  }
 
-	public StatusEmprestimo getStatusEmprestimo() {
-		return statusEmprestimo;
-	}
+  public void setDataDevolucao(LocalDate dataDevolucao) {
+    this.dataDevolucao = dataDevolucao;
+  }
 
-	public void setStatusEmprestimo(StatusEmprestimo statusEmprestimo) {
-		this.statusEmprestimo = statusEmprestimo;
-	}
+  public StatusEmprestimo getStatusEmprestimo() {
+    return statusEmprestimo;
+  }
 
-	public List<EmprestimoTemQuadrinho> getQuadrinhos() {
-		return quadrinhos;
-	}
+  public void setStatusEmprestimo(StatusEmprestimo statusEmprestimo) {
+    this.statusEmprestimo = statusEmprestimo;
+  }
 
-	public void setQuadrinhos(List<EmprestimoTemQuadrinho> quadrinhos) {
-		this.quadrinhos = quadrinhos;
-	}
+  public List<EmprestimoTemQuadrinho> getQuadrinhos() {
+    return quadrinhos;
+  }
+
+  public void setQuadrinhos(List<EmprestimoTemQuadrinho> quadrinhos) {
+    this.quadrinhos = quadrinhos;
+  }
 
 }

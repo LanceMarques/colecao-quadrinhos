@@ -29,7 +29,7 @@ public class QuadrinhoController {
 
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/id/{id}")
   public ResponseEntity<Quadrinho> buscarPorId(@PathVariable("id") final Integer id) {
 
     final Quadrinho quadrinhoSalvo = this.quadrinhoService.buscarPorId(id);
@@ -45,7 +45,7 @@ public class QuadrinhoController {
 
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("/id/{id}")
   public ResponseEntity<Quadrinho> atualizar(@PathVariable final Integer id,
       @RequestBody final Quadrinho quadrinho) {
 
@@ -54,7 +54,7 @@ public class QuadrinhoController {
 
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/id/{id}")
   public ResponseEntity<?> excluir(@PathVariable final Integer id) {
 
     this.quadrinhoService.excluirPorId(id);

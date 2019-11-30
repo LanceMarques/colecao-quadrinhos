@@ -1,5 +1,7 @@
 package com.ihc.quadrinhosorientais.infra.titulo;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,8 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ihc.quadrinhosorientais.infra.quadrinho.Quadrinho;
 import com.ihc.quadrinhosorientais.infra.quadrinho.enums.TipoQuadrinho;
 import com.ihc.quadrinhosorientais.infra.titulo.enums.EstadoColecao;
 
@@ -39,6 +44,10 @@ public class Titulo {
 
   @Column(name = "TIPO")
   private TipoQuadrinho tipoQuadrinho;
+
+  @OneToMany(mappedBy = "titulo", orphanRemoval = true)
+  @JsonIgnore
+  private List<Quadrinho> quadrinhos = new ArrayList<Quadrinho>();
 
   public Titulo() {
     super();
@@ -72,8 +81,8 @@ public class Titulo {
     this.nome = nome;
   }
 
-  
-  
+
+
   public String getUrlImagem() {
     return urlImagem;
   }
@@ -104,6 +113,29 @@ public class Titulo {
 
   public void setTipoQuadrinho(TipoQuadrinho tipoQuadrinho) {
     this.tipoQuadrinho = tipoQuadrinho;
+  }
+
+  public String getEditora() {
+    return editora;
+  }
+
+  public void setEditora(String editora) {
+    this.editora = editora;
+  }
+
+  public List<Quadrinho> getQuadrinhos() {
+    return quadrinhos;
+  }
+
+  public void setQuadrinhos(List<Quadrinho> quadrinhos) {
+    this.quadrinhos = quadrinhos;
+  }
+
+  @JsonIgnore
+  public boolean temQuadrinhoAssociado() {
+
+    return !this.quadrinhos.isEmpty();
+
   }
 
 }
