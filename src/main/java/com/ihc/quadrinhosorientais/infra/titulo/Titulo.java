@@ -72,6 +72,8 @@ public class Titulo {
     this.nome = nome;
   }
 
+  
+  
   public String getUrlImagem() {
     return urlImagem;
   }
