@@ -47,7 +47,7 @@ public class AmigoExceptionHandler extends ResponseEntityExceptionHandler {
         messageSource.getMessage("amigo-ja-cadastrado", null, LocaleContextHolder.getLocale());
     final String mensagemDev = ex.toString();
     final List<Erro> erros = Arrays.asList(new Erro(mensagemUsr, mensagemDev));
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erros);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros);
   }
   
 }

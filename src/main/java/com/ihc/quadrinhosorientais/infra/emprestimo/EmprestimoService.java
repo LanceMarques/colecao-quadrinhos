@@ -78,4 +78,14 @@ public class EmprestimoService {
     this.emprestimoRepository.delete(emprestimoSalvo);
   }
 
+  public void devolver(Integer id) {
+
+    final Emprestimo emprestimo = this.buscarPorId(id);
+
+    emprestimo.setStatusEmprestimo(StatusEmprestimo.DEVOLVIDO);
+
+    this.emprestimoRepository.save(emprestimo);
+
+  }
+
 }

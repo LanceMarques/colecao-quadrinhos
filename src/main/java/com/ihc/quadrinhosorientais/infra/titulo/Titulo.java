@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ihc.quadrinhosorientais.infra.quadrinho.Quadrinho;
@@ -27,11 +28,12 @@ public class Titulo {
 
   @Size(min = 3, max = 20)
   @Column(name = "NOME")
-  private String nome;
-
+  private String titulo;
+  
   @Column(name = "EDITORA")
   private String editora;
 
+  @Size(min = 10, max = 300)
   @Column(name = "URL_IMAGEM")
   private String urlImagem;
 
@@ -40,12 +42,15 @@ public class Titulo {
 
   @Column(name = "ESTADO_COLECAO")
   @Enumerated(EnumType.STRING)
+  
   private EstadoColecao estadoColecao;
 
   @Column(name = "TIPO")
+  @NotNull
+  @Enumerated(EnumType.STRING)
   private TipoQuadrinho tipoQuadrinho;
 
-  @OneToMany(mappedBy = "titulo", orphanRemoval = true)
+  @OneToMany(mappedBy = "titulo")
   @JsonIgnore
   private List<Quadrinho> quadrinhos = new ArrayList<Quadrinho>();
 
@@ -57,7 +62,7 @@ public class Titulo {
       EstadoColecao estadoColecao, TipoQuadrinho tipoQuadrinho) {
     super();
     this.id = id;
-    this.nome = nome;
+    this.titulo = nome;
     this.editora = editora;
     this.urlImagem = urlImagem;
     this.avaliacao = avaliacao;
@@ -73,12 +78,12 @@ public class Titulo {
     this.id = id;
   }
 
-  public String getNome() {
-    return nome;
+  public String getTitulo() {
+    return titulo;
   }
 
-  public void setNome(String nome) {
-    this.nome = nome;
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
   }
 
 

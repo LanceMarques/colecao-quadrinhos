@@ -12,9 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ihc.quadrinhosorientais.infra.emprestimotemquadrinho.EmprestimoTemQuadrinho;
 import com.ihc.quadrinhosorientais.infra.quadrinho.enums.EstadoConservacao;
@@ -37,7 +37,6 @@ public class Quadrinho {
   private EstadoConservacao estadoConservacao;
 
   @Min(value = 0)
-  @Max(value = 20)
   @Column(name = "QUANTIDADE")
   private Integer quantidade;
 
@@ -46,6 +45,10 @@ public class Quadrinho {
 
   @Column(name = "VALOR")
   private double valor;
+
+  @Size(min = 10, max = 300)
+  @Column(name = "URL_IMAGEM")
+  private String urlImagem;
 
   @OneToMany(mappedBy = "quadrinho")
   @JsonIgnore
@@ -56,7 +59,7 @@ public class Quadrinho {
   }
 
   public Quadrinho(Integer id, Titulo titulo, EstadoConservacao estadoConservacao,
-      Integer quantidade, Integer volume, double valor, List<EmprestimoTemQuadrinho> emprestimos) {
+      Integer quantidade, Integer volume, double valor,String urlImagem, List<EmprestimoTemQuadrinho> emprestimos) {
     super();
     this.id = id;
     this.titulo = titulo;
@@ -64,6 +67,7 @@ public class Quadrinho {
     this.quantidade = quantidade;
     this.volume = volume;
     this.valor = valor;
+    this.urlImagem = urlImagem;
     this.emprestimos = emprestimos;
   }
 
@@ -113,6 +117,14 @@ public class Quadrinho {
 
   public void setValor(double valor) {
     this.valor = valor;
+  }
+  
+  public String getUrlImagem() {
+    return urlImagem;
+  }
+
+  public void setUrlImagem(String urlImagem) {
+    this.urlImagem = urlImagem;
   }
 
   public List<EmprestimoTemQuadrinho> getEmprestimos() {

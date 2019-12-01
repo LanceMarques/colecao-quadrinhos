@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class QuadrinhoController {
   private QuadrinhoService quadrinhoService;
 
   @GetMapping("/titulo/{idTitulo}")
+  @CrossOrigin
   public ResponseEntity<List<Quadrinho>> listarPorTitulo(
       @PathVariable("idTitulo") final Integer idTitulo) {
 
@@ -30,6 +32,7 @@ public class QuadrinhoController {
   }
 
   @GetMapping("/id/{id}")
+  @CrossOrigin
   public ResponseEntity<Quadrinho> buscarPorId(@PathVariable("id") final Integer id) {
 
     final Quadrinho quadrinhoSalvo = this.quadrinhoService.buscarPorId(id);
@@ -38,6 +41,7 @@ public class QuadrinhoController {
   }
 
   @PostMapping
+  @CrossOrigin
   public ResponseEntity<Quadrinho> criar(@RequestBody final Quadrinho quadrinho) {
 
     final Quadrinho quadrinhosalvo = this.quadrinhoService.criar(quadrinho);
@@ -46,6 +50,7 @@ public class QuadrinhoController {
   }
 
   @PutMapping("/id/{id}")
+  @CrossOrigin
   public ResponseEntity<Quadrinho> atualizar(@PathVariable final Integer id,
       @RequestBody final Quadrinho quadrinho) {
 
@@ -55,6 +60,7 @@ public class QuadrinhoController {
   }
 
   @DeleteMapping("/id/{id}")
+  @CrossOrigin
   public ResponseEntity<?> excluir(@PathVariable final Integer id) {
 
     this.quadrinhoService.excluirPorId(id);

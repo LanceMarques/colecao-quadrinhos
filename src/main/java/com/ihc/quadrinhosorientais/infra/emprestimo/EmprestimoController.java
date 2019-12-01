@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -55,6 +56,16 @@ public class EmprestimoController {
       @RequestBody final Emprestimo emprestimo) {
 
     this.emprestimoService.atualizar(id, emprestimo);
+    return ResponseEntity.status(HttpStatus.OK).build();
+
+  }
+  
+  @PatchMapping("/id/{id}")
+  @CrossOrigin
+  public ResponseEntity<Object> devolver(@PathVariable final Integer id,
+      @RequestBody final Emprestimo emprestimo) {
+
+    this.emprestimoService.devolver(id);
     return ResponseEntity.status(HttpStatus.OK).build();
 
   }
