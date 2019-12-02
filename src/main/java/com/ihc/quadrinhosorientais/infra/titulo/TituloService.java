@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ihc.quadrinhosorientais.infra.titulo.exceptions.TituloEditoraJaCadastradoException;
 import com.ihc.quadrinhosorientais.infra.titulo.exceptions.TituloNaoEncontradoException;
 import com.ihc.quadrinhosorientais.infra.titulo.exceptions.TituloQuadrinhoAssociadoException;
 
@@ -27,7 +28,21 @@ public class TituloService {
   }
 
   public Titulo criar(final Titulo titulo) {
+    
+    final String nome = titulo.getTitulo();
+    
+    final String editora = titulo.getEditora();
+    
+    final Optional<Titulo> tituloOptional = this.tituloRepository.findByTituloAndEditora(nome, editora);
+        
+    if(tituloOptional.isPresent()) {
+      
+      throw new TituloEditoraJaCadastradoException();
+      
+    }
+    
     return this.tituloRepository.save(titulo);
+    
   }
 
   public Titulo atualizar(final Integer id, final Titulo titulo) {

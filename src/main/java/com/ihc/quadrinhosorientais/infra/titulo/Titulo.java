@@ -28,8 +28,10 @@ public class Titulo {
 
   @Size(min = 3, max = 20)
   @Column(name = "NOME")
+  @NotNull
   private String titulo;
   
+  @NotNull
   @Column(name = "EDITORA")
   private String editora;
 

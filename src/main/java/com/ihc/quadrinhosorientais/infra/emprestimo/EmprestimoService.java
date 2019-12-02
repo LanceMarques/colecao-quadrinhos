@@ -41,6 +41,8 @@ public class EmprestimoService {
 
     final Amigo amigoSalvo = this.amigoService.buscarPorId(amigo.getId());
 
+    this.amigoService.verificarEmprestimoPendente(amigoSalvo);
+
     final List<EmprestimoTemQuadrinho> quadrinhos = emprestimo.getQuadrinhos();
     emprestimo.setQuadrinhos(Arrays.asList());
 
@@ -82,6 +84,7 @@ public class EmprestimoService {
 
     final Emprestimo emprestimo = this.buscarPorId(id);
 
+    emprestimo.setDataDevolucao(LocalDate.now());
     emprestimo.setStatusEmprestimo(StatusEmprestimo.DEVOLVIDO);
 
     this.emprestimoRepository.save(emprestimo);

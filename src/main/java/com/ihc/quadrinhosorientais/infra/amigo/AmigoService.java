@@ -73,13 +73,17 @@ public class AmigoService {
 
     final Amigo amigoSalvo = this.buscarPorId(id);
 
-    if (amigoSalvo.temEmprestimoVinculado()) {
+    verificarEmprestimoPendente(amigoSalvo);
+
+    this.amigoRepository.delete(amigoSalvo);
+  }
+
+  public void verificarEmprestimoPendente(final Amigo amigo) {
+    if (amigo.temEmprestimoVinculado()) {
 
       throw new AmigoEmprestimoVinculadoException();
 
     }
-
-    this.amigoRepository.delete(amigoSalvo);
   }
 
 }
